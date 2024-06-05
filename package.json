@@ -1,7 +1,7 @@
 {
   "name": "wapl-desktop",
   "productName": "Wapl Desktop",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Wapl Desktop App for Linux",
   "license": "MIT",
   "main": "src/index.js",
@@ -23,7 +23,10 @@
     "@electron/fuses": "^1.8.0",
     "electron": "30.0.6"
   },
-  "keywords": [],
+  "keywords": [
+    "wapl",
+    "wapl desktop"
+  ],
   "author": {
     "name": "dolgun0118",
     "email": "donggeon_lee2@tmax.co.kr"

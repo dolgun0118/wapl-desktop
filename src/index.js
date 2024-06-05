@@ -29,16 +29,23 @@ const createWindow = () => {
 };
 
 const createTray = () => {
-  tray = new Tray(path.join(__dirname, "assets", "256x256.png")); // Set path for tray icon
+  tray = new Tray(
+    path.join(
+      __dirname,
+      "assets",
+      process.platform === "darwin" ? "16x16_white.png" : "75x75.png"
+    )
+  ); // Set path for tray icon
+
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: "Show App",
+      label: "Open Wapl",
       click: () => {
         mainWindow.show(); // Show the main window
       },
     },
     {
-      label: "Quit",
+      label: "Quit Wapl",
       click: () => {
         app.isQuiting = true; // Flag for quitting
         mainWindow.close(); // Close the main window
@@ -46,7 +53,7 @@ const createTray = () => {
     },
   ]);
 
-  tray.setToolTip("Your App Name"); // Set tooltip for tray icon
+  tray.setToolTip("Wapl Desktop"); // Set tooltip for tray icon
   tray.setContextMenu(contextMenu); // Set context menu for tray icon
 
   // Show the main window when tray icon is clicked
