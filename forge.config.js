@@ -8,7 +8,7 @@ module.exports = {
     name: "Wapl Desktop",
     productName: "Wapl Desktop",
     executableName: "wapl-desktop",
-    icon: path.join(__dirname, "src", "assets", "1024x1024.icns"),
+    icon: path.join(__dirname, "src", "assets", "512x512_darwin.icns"),
   },
   rebuildConfig: {},
   makers: [
@@ -21,7 +21,7 @@ module.exports = {
       platforms: ["darwin"],
       config: {
         options: {
-          icon: path.join(__dirname, "src", "assets", "1024x1024.icns"),
+          icon: path.join(__dirname, "src", "assets", "512x512_darwin.icns"),
         },
       },
     },

@@ -33,7 +33,7 @@ const createTray = () => {
     path.join(
       __dirname,
       "assets",
-      process.platform === "darwin" ? "16x16_white.png" : "75x75.png"
+      process.platform === "darwin" ? "16x16_white_darwin.png" : "75x75.png"
     )
   ); // Set path for tray icon
 
