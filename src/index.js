@@ -1,4 +1,5 @@
-const { app, BrowserWindow, Tray, Menu, shell } = require("electron");
+const { app, BrowserWindow, Tray, Menu, shell, ipcMain } = require("electron");
+
 const path = require("node:path");
 
 let mainWindow;
@@ -23,6 +24,35 @@ const createWindow = () => {
 
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url);
+  });
+
+  mainWindow.webContents.on("did-finish-load", () => {
+    mainWindow.webContents.executeJavaScript(`
+    if ("Notification" in window) {
+      const OriginalNotification = window.Notification;
+  
+      window.Notification = function (title, options) {
+        const notification = new OriginalNotification(title, options);
+  
+        notification.onclick = function () {
+          if (
+            window.electronAPI &&
+            typeof window.electronAPI.notificationClicked === "function"
+          ) {
+            window.electronAPI.notificationClicked();
+          } else {
+            console.error("electronAPI.notificationClicked is not defined");
+          }
+        };
+  
+        return notification;
+      };
+  
+      window.Notification.requestPermission =
+        OriginalNotification.requestPermission.bind(OriginalNotification);
+      window.Notification.permission = OriginalNotification.permission;
+    }
+    `);
   });
 
   createTray(); // Create tray icon and menu
@@ -79,4 +109,9 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
+});
+
+ipcMain.on("notification-clicked", () => {
+  if (mainWindow.isMinimized()) mainWindow.restore();
+  mainWindow.focus();
 });

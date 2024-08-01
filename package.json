@@ -1,7 +1,7 @@
 {
   "name": "wapl-desktop",
   "productName": "Wapl Desktop",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Wapl Desktop App for Linux",
   "license": "MIT",
   "main": "src/index.js",
