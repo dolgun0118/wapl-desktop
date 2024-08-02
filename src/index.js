@@ -30,11 +30,13 @@ const createWindow = () => {
     mainWindow.webContents.executeJavaScript(`
     if ("Notification" in window) {
       const OriginalNotification = window.Notification;
-  
+    
       window.Notification = function (title, options) {
+        // 새로운 Notification 객체 생성
         const notification = new OriginalNotification(title, options);
-  
-        notification.onclick = function () {
+    
+        // 기존의 onclick 방식 대신 addEventListener를 사용하여 클릭 이벤트 리스너 추가
+        notification.addEventListener('click', function () {
           if (
             window.electronAPI &&
             typeof window.electronAPI.notificationClicked === "function"
@@ -43,11 +45,13 @@ const createWindow = () => {
           } else {
             console.error("electronAPI.notificationClicked is not defined");
           }
-        };
-  
+        });
+    
+        // Notification 객체 반환
         return notification;
       };
-  
+    
+      // requestPermission과 permission 속성을 기존 Notification에서 복사
       window.Notification.requestPermission =
         OriginalNotification.requestPermission.bind(OriginalNotification);
       window.Notification.permission = OriginalNotification.permission;
