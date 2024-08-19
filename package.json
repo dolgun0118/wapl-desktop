@@ -10,7 +10,11 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "make:darwin": "electron-forge make --platform darwin",
+    "make:win": "electron-forge make --platform win32",
+    "make:linux": "electron-forge make --platform linux",
+    "make:all": "npm-run-all make:darwin make:win32 make:win make:linux"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.4.0",
@@ -21,7 +25,9 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
-    "electron": "30.0.6"
+    "cross-env": "^7.0.3",
+    "electron": "30.0.6",
+    "npm-run-all": "^4.1.5"
   },
   "keywords": [
     "wapl",

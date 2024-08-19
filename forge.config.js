@@ -14,7 +14,12 @@ module.exports = {
   makers: [
     {
       name: "@electron-forge/maker-squirrel",
-      config: {},
+      config: {
+        name: "wapl_desktop",
+        setupIcon: path.join(__dirname, "src", "assets", "256x256.ico"), // 로컬 아이콘 파일 경로
+        setupExe: "WaplDesktopSetup.exe",
+        setupMsi: "WaplDesktopSetup.msi",
+      },
     },
     {
       name: "@electron-forge/maker-zip",
